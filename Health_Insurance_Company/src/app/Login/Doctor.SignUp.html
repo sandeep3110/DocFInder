@@ -1,0 +1,156 @@
+
+<div id="Docsignupbox" style="display:none; margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    <h2 title = "William Osler" style = "color :#00e870; width : 600px;"> 
+        <b><em>MEDICINE</em></b> 
+        <em>is a science of </em>  
+        <b><em>UNCERTAINITY</em></b> 
+        <em>and an art of </em>
+        <b><em>PROBABILTY</em></b>
+    </h2>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="panel-title">Sign Up</div>
+                <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" [routerLink]="['/login']" onclick="$('#Docsignupbox').hide(); $('#loginbox').show()">Sign In</a></div>
+            </div>
+            <div class="panel-body">
+    
+                <!-- Doctor Sign UP  form starts from here  -->
+    
+                <form id="signupform" class="form-horizontal" role="form" [formGroup]="entryForm" (ngSubmit)="register()" style="text-align : center ; font-weight : bold;"  novalidate>
+    
+                    <!-- First Name Form field -->
+    
+                    <div class="form-group">
+    
+                        <label for="firstname" class="col-md-3 control-label">First Name</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" formControlName="firstname" placeholder="First Name">
+                        </div>
+                    </div>
+    
+                    <p *ngIf="(entryForm.get('firstname').hasError('pattern') && entryForm.get('firstname').touched )"> Invalid First Name </p>
+    
+                    <!-- Last Name Form field -->
+    
+                    <div class="form-group">
+    
+                        <label for="lastname" class="col-md-3 control-label">Last Name</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" formControlName="lastname" placeholder="Last Name">
+                        </div>
+                    </div>
+    
+                    <p *ngIf="(entryForm.get('lastname').touched && entryForm.get('lastname').hasError('pattern') )"> Invalid Last Name </p>
+
+                    <!-- Specialty -->
+    
+                    <!-- <div class="form-group">                           
+                        <label for="specialty" class="col-md-3 control-label"> Your Specialty</label>
+                             <div class="col-md-9">
+                                 <input type="text" class="form-control" list = "specialty" formControlName="specialty" placeholder="specialty">
+                                 <datalist id="specialty">
+                                        <option value="Allergist">
+                                        <option value="Bariatric Physician">
+                                        <option value="Bioidentical Hormone Doctor">
+                                        <option value="Cardiologist">
+                                        <option value="Dermatologist">
+                                        <option value="Allergist">
+                                        <option value="Bariatric Physician">
+                                        <option value="Bioidentical Hormone Doctor">
+                                        <option value="Cardiologist">
+                                        <option value="Dermatologist">
+                                      </datalist>
+                             </div>
+                    </div> -->
+
+                    <div class="form-group">                           
+                        <label for="specialty" class="col-md-3 control-label"> Your Specialty</label>
+                             <div class="col-md-9">
+                                 <input type="text" class="form-control" list = "specialty" formControlName="specialty" placeholder="specialty">
+                                 <datalist id="specialty">                                        
+                                            <option *ngFor="let specialty of listOfSpecialties" value= "{{specialty}}"></option>                                       
+                                      </datalist>
+                             </div>
+                            
+                    <p *ngIf="(entryForm.get('specialty').touched && entryForm.get('specialty').hasError('required') )"> Please Select any one option </p>
+                    </div>
+                        
+                    <!--Phone number Form field -->
+    
+                    <div class="form-group">
+                        <label for="phone" class="col-md-3 control-label"> Your Direct Phone Number </label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" formControlName="phone" placeholder="phone">
+                        </div>
+                    </div>
+    
+                    <p *ngIf="(entryForm.get('phone').hasError('pattern') && entryForm.get('phone').touched)"> Invalid Phone Number , minimum 10 digits expected/US numbers/No special Characters are allowed </p>
+    
+                  
+                    <!-- Zip Code form -->
+                        
+                    <div class="form-group">
+                            <label for="zip" class="col-md-3 control-label"> Zip Code </label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" formControlName="zipcode" placeholder="Zip Code">
+                            </div>
+                        </div>
+        
+                        <p *ngIf="(entryForm.get('zipcode').hasError('pattern') && entryForm.get('zipcode').touched)"> Please enter a valid five digit Zip code </p>
+                        
+                    <!-- Email form field -->
+    
+                    <div class="form-group">
+                        <label for="email" class="col-md-3 control-label"> Email </label>
+                        <div class="col-md-9">
+                            <input type="email" class="form-control" formControlName="email" placeholder="name @ domain.com">
+                        </div>
+                    </div>
+    
+                    <p *ngIf="(entryForm.get('email').hasError('pattern') && entryForm.get('email').touched )"> Invalid email expected format name @ domain.com </p>
+    
+                    <!--Password Form field -->
+    
+                    <div class="form-group">
+                        <label for="password" class="col-md-3 control-label">Password</label>
+                        <div class="col-md-9">
+                            <input type="password" class="form-control" formControlName="password" placeholder="Password">
+                        </div>
+                    </div>
+                    <p *ngIf="(entryForm.get('password').touched && entryForm.get('password').hasError('pattern') )">
+                        password is invalid - Please include one Number , One upper Case , One Lower Case , One Alpha Number Char !@#$% ,Minimum
+                        6 in Length<span class="st-icon-ebay"></span> </p>
+    
+                    <!-- Confirm Password Form field -->
+    
+                    <div class="form-group">
+                        <label for="confirmpassword" class="col-md-3 control-label">Confirm Password</label>
+                        <div class="col-md-9">
+                            <input type="password" class="form-control" formControlName="ConfirmPassword" placeholder="Password">
+                        </div>
+                    </div>
+                    <p *ngIf="((entryForm.get('password').value != entryForm.get('ConfirmPassword').value) && entryForm.get('ConfirmPassword').touched)">
+    
+                        password and confirm password does not match <span class="st-icon-ebay"></span> </p>
+    
+    
+    
+                    <!-- Submit Button -->
+    
+                    <div class="form-group">    
+                        <div class="col-md-offset-3 col-md-9">    
+                            <button id="btn-signup" type="submit" class="btn btn-info" [disabled]="!entryForm.valid" ><i class="icon-hand-right"></i> &nbsp; Sign Up</button>                                   
+                        </div>   
+                    </div>
+    
+                     
+    
+    
+                </form>
+            </div>
+        </div>
+    
+    
+    
+    
+    </div>

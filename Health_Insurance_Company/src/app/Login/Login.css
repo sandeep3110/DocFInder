@@ -1,0 +1,7 @@
+.w3ls-banner{ 
+	background: url(app/Images/Login-page.jpg);
+	background-size: cover;
+	/* position : relative ; because of this image gets fixes in position  */ 
+    margin-top : -80px;
+	
+} 

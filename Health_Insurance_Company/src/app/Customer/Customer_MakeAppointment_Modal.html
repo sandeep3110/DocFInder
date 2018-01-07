@@ -1,0 +1,50 @@
+<Customer-Header>
+</Customer-Header>
+
+<section>
+
+  <div id="bookingForm">
+    <h4 id="myModalLabel"> Fix your appointment with - <em> {{doctorName}} </em> </h4>
+
+    <div class="modal-body">
+
+      <!-- book appointment  starts from here -->
+
+
+      <label>Choose Date and Time :
+         <!-- <datetime   [(ngModel)]="date"  [timepicker]="timepickerOpts"
+                          [datepicker]= "datepickerOpts" [hasClearButton]="true">
+              </datetime>  for both date and time -->              
+        <datetime   [(ngModel)]="bookedDate" [timepicker]="false" [datepicker]= "datepickerOpts" [hasClearButton]="false"></datetime>        
+       </label>     
+      <br><br>
+      <button (click) = "getAvailableDates(bookedDate)"> Check Availability</button>
+      <div [hidden] = "!(availableTimes && availableTimes.length)"> 
+          <br><br>         
+                <span *ngFor = "let time of availableTimes">
+                    <button class="btn btn-primary btn-lg"  style = "margin-right : 10px;" (click) = "getDate(time)"> {{time | date : 'shortTime'}} </button>
+                </span>     
+          <br><br>        
+      </div>
+      
+      <h5 [hidden] = "!(availableTimes && availableTimes.length)"><strong><i>Selected Time slot: </i></strong> {{bookedDate | date: "medium"}}</h5>
+      <h5><strong><i> {{ errorMessage }}  </i></strong> </h5>
+      <br>
+      <label> Medical reason : </label>
+      <br>
+      <textarea rows="7" cols="70" [(ngModel)]="consultingReason">Enter consulting reason here...</textarea>
+      <br>
+
+      <button type="submit" class="btn btn-primary btn-lg" (click) = "bookAppoint()">
+              Submit &nbsp;<span class="glyphicon glyphicon-search"></span></button>
+
+
+
+
+
+    </div>
+  </div>
+  <div id="image"></div>
+
+</section>
+<Customer-Footer></Customer-Footer>

@@ -1,0 +1,181 @@
+
+<div id="Custsignupbox" style="display:none; margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    <h1 style = "color :#00e870; width : 650px;"> Health Insurance for Every Stage of Life.</h1>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <div class="panel-title">Sign Up</div>
+            <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" [routerLink]="['/login']" onclick="$('#Custsignupbox').hide(); $('#loginbox').show()">Sign In</a></div>
+        </div>
+        <div class="panel-body">
+
+            <!-- Customer Sign UP  form starts from here  -->
+
+            <form id="signupform" class="form-horizontal" role="form" [formGroup]="entryForm" (ngSubmit)="register()"  style="text-align : center ; font-weight : bold;" novalidate>
+
+                <!-- First Name Form field -->
+
+                <div class="form-group">
+
+                    <label for="firstname" class="col-md-3 control-label">First Name</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" formControlName="firstname" placeholder="First Name">
+                    </div>
+                </div>
+
+                <p *ngIf="(entryForm.get('firstname').hasError('pattern') && entryForm.get('firstname').touched )"> Invalid First Name </p>
+
+                <!-- Last Name Form field -->
+
+                <div class="form-group">
+
+                    <label for="lastname" class="col-md-3 control-label">Last Name</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" formControlName="lastname" placeholder="Last Name">
+                    </div>
+                </div>
+
+                <p *ngIf="(entryForm.get('lastname').touched && entryForm.get('lastname').hasError('pattern') )"> Invalid Last Name </p>
+
+                <!--Age Form field -->
+
+                <div class="form-group">
+                    <label for="age" class="col-md-3 control-label"> Age </label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" formControlName="age" placeholder="age">
+                    </div>
+                </div>
+
+                <p *ngIf="(entryForm.get('age').touched && entryForm.get('age').hasError('pattern') )"> Age should not be 0 </p>
+
+                <!--Phone number Form field -->
+
+                <div class="form-group">
+                    <label for="phone" class="col-md-3 control-label"> Phone </label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" formControlName="phone" placeholder="phone">
+                    </div>
+                </div>
+
+                <p *ngIf="(entryForm.get('phone').hasError('pattern') && entryForm.get('phone').touched)"> Invalid Phone Number , minimum 10 digits expected/US numbers/No special Characters are allowed </p>
+
+                <!--Address Line1 Form field -->
+
+                <div class="form-group">
+                    <label for="address" class="col-md-3 control-label"> House Number / Street Name  </label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" formControlName="address" placeholder="eg : 64 surrey Way / 509 Anderson St">
+                    </div>
+                </div>
+
+                <p *ngIf="(entryForm.get('address').touched && entryForm.get('address').hasError('pattern') )"> House and street number should not be blank </p>
+
+                <!--City Form field -->
+
+                <div class="form-group">
+                    <label for="city" class="col-md-3 control-label"> City </label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" formControlName="city" placeholder="City">
+                    </div>
+                </div>
+
+                <p *ngIf="(entryForm.get('city').hasError('pattern') && entryForm.get('city').touched )"> City should not be blank and must be in alphabets </p>
+
+                 <!-- Zip Code form -->
+                        
+                 <div class="form-group">
+                        <label for="zip" class="col-md-3 control-label"> Zip Code </label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" formControlName="zipcode" placeholder="Zip Code">
+                        </div>
+                    </div>
+    
+                    <p *ngIf="(entryForm.get('zipcode').hasError('pattern') && entryForm.get('zipcode').touched)"> Please enter a valid five digit Zip code </p>
+
+                <!--State Form field -->
+
+                <div class="form-group">
+                    <label for="state" class="col-md-3 control-label"> State </label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" formControlName="state" placeholder="eg : MO , PA , TX">
+                    </div>
+                </div>
+
+                <p *ngIf="(entryForm.get('state').touched && entryForm.get('state').hasError('pattern') )"> Invalid entry for state eg : MO , PA , TX </p>
+
+                <!-- Email form field -->
+
+                <div class="form-group">
+                    <label for="email" class="col-md-3 control-label"> Email </label>
+                    <div class="col-md-9">
+                        <input type="email" class="form-control" formControlName="email" placeholder="name @ domain.com">
+                    </div>
+                </div>
+
+                <p *ngIf="(entryForm.get('email').hasError('pattern') && entryForm.get('email').touched )"> Invalid email expected format name @ domain.com </p>
+
+                <!--Password Form field -->
+
+                <div class="form-group">
+                    <label for="password" class="col-md-3 control-label">Password</label>
+                    <div class="col-md-9">
+                        <input type="password" class="form-control" formControlName="password" placeholder="Password">
+                    </div>
+                </div>
+                <p *ngIf="(entryForm.get('password').touched && entryForm.get('password').hasError('pattern') )">
+                    password is invalid - Please include one Number , One upper Case , One Lower Case , One Alpha Number Char !@#$% ,Minimum
+                    6 in Length<span class="st-icon-ebay"></span> </p>
+
+                <!-- Confirm Password Form field -->
+
+                <div class="form-group">
+                    <label for="confirmpassword" class="col-md-3 control-label">Confirm Password</label>
+                    <div class="col-md-9">
+                        <input type="password" class="form-control" formControlName="ConfirmPassword" placeholder="Password">
+                    </div>
+                </div>
+                <p *ngIf="((entryForm.get('password').value != entryForm.get('ConfirmPassword').value) && entryForm.get('ConfirmPassword').touched)">
+
+                    password and confirm password does not match <span class="st-icon-ebay"></span> </p>
+
+
+
+                <!-- Submit Button -->
+
+                <div class="form-group">
+
+                    <div class="col-md-offset-3 col-md-9">
+
+                        <button  type="submit" class="btn btn-info" [disabled]="!entryForm.valid" ><i class="icon-hand-right"></i> &nbsp; Sign Up</button>
+
+                        <span style="margin-left:8px;">or</span>
+
+                    </div>
+
+
+
+                </div>
+
+                <!-- Sign up with Facebook -->
+
+                <div style="border-top: 1px solid #999; padding-top:20px" class="form-group">
+
+                    <div class="col-md-offset-3 col-md-9">
+                       
+                        <a id="btn-fblogin" href="https://www.facebook.com/" class="btn btn-primary">  <i class="icon-facebook"></i> Sign Up with Facebook </a>
+
+                    </div>
+
+                </div>
+
+
+
+
+
+            </form>
+        </div>
+    </div>
+
+
+
+
+</div>

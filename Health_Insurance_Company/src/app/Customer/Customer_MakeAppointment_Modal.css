@@ -1,0 +1,16 @@
+#image{
+    height: 500px;
+    background-image: url("app/Customer/Images/Health_Insurance_11.jpg");
+    background-size: cover;
+    /* background-color: orange; */
+    margin: -400px 0 0 649px;
+    width: 700px;
+}
+
+#bookingForm{
+    margin : 200px 0 0 40px;
+}
+
+#myModalLabel{
+    color : rgba(81, 41, 175, 0.98);
+}

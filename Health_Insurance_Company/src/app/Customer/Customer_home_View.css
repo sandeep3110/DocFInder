@@ -1,0 +1,23 @@
+.customer-body{ 
+    height : 700px;
+	background-image: url("app/Customer/Images/Health_Insurance_7.png");
+	background-size: cover; /* auto|length|cover|contain|initial|inherit; */
+	/* position : relative ; because of this image gets fixes in position  */ 
+    margin-top : 100px;
+	
+} 
+
+#greeting-text{
+    margin : 0 0 0 750px;
+    /* background-color: purple; */
+    height : 600px;
+    width : 580px;
+}
+
+h1{
+   padding : 45px 10px;
+   text-shadow: #B769FF;
+   padding-top: 100px;
+}
+
+

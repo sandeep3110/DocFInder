@@ -1,0 +1,14 @@
+.container{
+	padding-top : 150px;
+	margin-bottom: 50px;
+    margin-left: 200px;
+    margin-top: 20px;
+	/* background-color: green; */
+	width : 1000px;
+}
+
+#reviewTitle{
+    margin-top:-50px;
+    width: 800px;
+    font-family: 'Comic Sans MS', 'cursive', 'sans-serif' ;
+}

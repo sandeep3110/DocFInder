@@ -1,0 +1,64 @@
+
+<!-- Divison for error Message -->
+
+<div class="jumbotron" id = "errJumbotron"  *ngIf="message != null">
+  <div class="container" style="margin-top : -15px;">
+    <table style="padding : 20px 0 0 40px;">
+      <tr>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr>
+        <td style ="padding-left : 40px;">
+          <i class="fa fa-heartbeat" style ="font-size:100px; color:#F50A0A;"></i>
+        </td>
+        <td style ="padding-left : 40px;">
+          <p style=" font-family: 'Comic Sans MS', cursive, sans-serif ;"> {{message}} </p>
+        </td>
+      </tr>
+    </table>
+   </div>
+</div>
+
+<!-- Divison for Doctor List -->
+
+<div class="jumbotron"  *ngIf="message === null">
+  <div class="container" style="margin-top : -20px;">
+    <table style="padding-left : 60px;">
+      <tr>
+        <th></th>
+        <th></th>
+      </tr>
+
+      <tr>
+        <td style ="padding-left : 50px;">
+          <i class="fa fa-user-md" style="font-size:150px;color:#B1B1A5" title="Doctor Image coming soon"></i>
+        </td>
+        <td style="padding : 20px 0 0 60px;">
+          <h2 style=" font-family: 'Trebuchet MS', Helvetica, sans-serif ;"> {{docList.doctorName | uppercase}} </h2>
+          <!-- rating readonly -->
+          <rating [(ngModel)]="docList.rating"  [readonly]="true" [max]="5"  style="font-size:22px;" > </rating>
+          <p style="font-family : 'Trebuchet MS', Helvetica, sans-serif ;" title="Hospital Address">
+            <i class="fa fa-hospital-o custom" style = "color:rgba(17, 249, 155, 0.99)"></i> {{docList.address | uppercase}}
+          </p>
+          <p style="font-style: italic " title="Availability">
+            <i class="fa fa-calendar-check-o" style = "color:#93f300"></i> Next Availability : {{docList.availbleDate | date : fullDate }}
+          </p>
+        </td>
+        <td style="padding : 0 0 0 100px;">
+            
+            <p>
+                <button type="button"  class="btn btn-success"  (click) = "setSelectedDoctorMemberId(docList.memberId , docList.doctorName , 'Appointment')"> Make Appointment</button>
+            </p>
+            <p>
+                <button type="button" class="btn btn-info" (click) = "setSelectedDoctorMemberId(docList.memberId , docList.doctorName , 'Review')"  > Add Review </button>
+            </p>
+            
+        </td>
+      </tr>
+    </table>    
+  </div>
+</div>
+
+
+

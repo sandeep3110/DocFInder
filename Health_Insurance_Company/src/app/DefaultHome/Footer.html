@@ -1,0 +1,78 @@
+<!-- Division for email updates -->
+<div id="newsletter">
+  <!-- NewsLetter Form starts from Here -->
+  <form  [formGroup]="newsLetter" (ngSubmit)="newsLetterEmail()" novalidate>
+    <table style="margin-left : 100px;">
+      <tr>
+        <td style="padding : 0px 25px 0px 100px ;">
+          <p style=" color : #FFDEA8; font-size : 28px; padding:  5px 5px 0px 5px ; "> Please Subscribe to our New's Letter </p>
+        </td>
+        <td style="padding : 5px 5px 0px 5px ;">
+          <!-- Text Box for email -->
+          <input type="email" formControlName="userEmail" placeholder="username@domain.com" style="text-align : center ; font-weight : bold;" />
+          <p *ngIf="(newsLetter.get('userEmail').hasError('pattern') && newsLetter.get('userEmail').touched )" style="color :#17E217 ; font-weight : bold;"> 
+            Invalid email address entered,please enter again!! </p>
+        </td>
+        <td style="padding : 5px 5px 0px 5px ;">
+          <input type="submit" value="SUBMIT" style="background-color :  #ff6600; font-weight: bold;" />
+        </td>
+      </tr>
+    </table>
+
+
+  </form>
+</div>
+
+<!-- Footer Division -->
+
+<footer class="footer-distributed">
+
+  <div class="footer-left">
+
+    <a [routerLink]="['/']">  <img src="app/Images/Company-Logo.png" alt="Company-Logo" height="80" width="100" style="padding : 5px 5px;"> </a>
+
+    <p class="footer-company-name">First Health Insurance &copy; 2017</p>
+  </div>
+
+  <div class="footer-center">
+
+    <div>
+      <i class="fa fa-map-marker"></i>
+      <p><span>108 W South St</span> Warrensburg, MO 64093</p>
+    </div>
+
+    <div>
+      <i class="fa fa-phone"></i>
+      <p>+1 816-372-5650</p>
+    </div>
+
+    <div>
+      <i class="fa fa-envelope"></i>
+      <p><a href="mailto:CXA68890@ucmo.edu">CXA68890@Ucmo.edu</a></p>
+    </div>
+
+  </div>
+
+  <div class="footer-right">
+
+    <p class="footer-company-about" style = "height: 220px; width: 350px;">
+      <span>About the company</span> 
+      First Health Insurance company is providing the health insurance on time with low cost 
+      of insurance premium paid by the customers , as well storing the health record of the
+      family members which is accessible to the doctors from the recognised multiple specialty 
+      hospitals which are tie up with Family health insurance company.
+    </p>
+
+    <div class="footer-icons">
+
+      <a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
+      <a href="https://twitter.com/?lang=en"><i class="fa fa-twitter"></i></a>
+      <a href="https://www.linkedin.com/uas/login"><i class="fa fa-linkedin"></i></a>
+      <a href="https://github.com/login?return_to=%2Fagoncal%2Fagoncal-application-conference%2Ftree%2Fmaster%2Fconference-commons-jwt%2Fsrc%2Fmain"><i class="fa fa-github"></i></a>
+
+    </div>
+
+  </div>
+  
+
+</footer>

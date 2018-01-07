@@ -1,0 +1,29 @@
+<!-- Division for Customer header -->
+<div>
+    <a [routerLink]="['/home' , id]">  <img src="app/Images/Company-Logo.png" alt="Company-Logo" height="80" width="100" style="padding : 5px 5px;"> </a>
+    <nav class="navbar navbar-inverse" style="margin : -60px 150px;">
+      <div class="container-fluid">
+        <ul class="nav navbar-nav">
+         <li class="dropdown" ><a [routerLink]="['/home' , id]"> Home </a></li>
+         <li id="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#"> Appointment <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li>
+                  <a [routerLink]="['/home/'+ id +'/appointment']" > Book Appointment  </a>
+              </li>
+              <li>
+                 <a [routerLink]="['/home/'+ id +'/delete-appointment']"> Cancel Appointment </a>
+              </li>              
+            </ul>
+          </li>
+          
+          <li id="dropdown" ><a [ngStyle] = "pointer()" (click) = "logOut()"> Log Out </a></li>
+        </ul>
+      </div>
+    </nav>
+</div>
+
+
+
+<!--  [queryParams]="{memberId : id}"
+  [queryParams]="{ id: memberId }" -->

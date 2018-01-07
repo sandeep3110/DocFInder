@@ -1,0 +1,34 @@
+
+.navbar-inverse{
+	background:transparent;
+	border-color:transparent;
+	
+	/* box-shadow: #F3CC91;
+	 background-image:none; */
+  }
+
+.navbar-nav {
+	font-weight: bolder;
+	font-size: 130%;	
+}
+
+.dropdown {
+	padding-left : 700px;	
+}
+
+#dropdown {
+	padding-left : 35px;
+}
+.dropdown a ,#dropdown a {
+	color : rgba(8, 9, 119, 0.76);	
+}
+
+
+/* Hover for list elements */
+.dropdown:hover a{
+    color: #070E74;
+}
+
+.dropdown-menu{
+	padding-left : 700px;	
+}

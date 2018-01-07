@@ -1,0 +1,69 @@
+<Customer-Header></Customer-Header>
+
+<!-- Combine divison for Picture and Form and search details -->
+<section class="combine">
+
+    <!-- Divison for search Form -->
+    <div class="container">
+
+        <div class="col-md-4">
+            <div class="form_main">
+                <h4 class="heading"><strong>Quick </strong> Search <span></span></h4>
+                <div class="form">
+                     
+                    <!--  search-form starts from here -->
+
+                    <form  name="searchForm"  [formGroup]="searchForm" (ngSubmit)="nearByDoctors()" style="text-align : center ; font-weight : bold;"  novalidate>
+                        
+                         <!--  Consulting Field ,id = 'txt' for CSS purpose -->
+
+                        <input id ="txt"  type="text"  list="reason"  formControlName="reason" placeholder="Consulting reason / doctor name">
+                        <datalist id="reason">
+                            <option *ngFor="let consultingReason of reasonList" value="{{consultingReason}}" ></option>
+                        </datalist>
+
+                        <p *ngIf="(searchForm.get('reason').hasError('required') && searchForm.get('reason').touched)"> Please select or enter , the Consulting reason or Doctor's Name </p>
+                       
+                         <!--  Zipcode Field ,id = 'txt' for CSS purpose -->
+
+                        <input id ="txt"  type="text" list = "zipcode"   formControlName="zipcode" placeholder="Zip code">
+                        <datalist id="zipcode">
+                            <option  *ngFor = "let zip of pinState"  value= '{{zip.pin}}'></option>                           
+                       </datalist>
+
+                        <p *ngIf="(searchForm.get('zipcode').hasError('required') && searchForm.get('zipcode').touched )"> Please select or enter ,the ZipCode </p>
+
+                         <!--  Career Field ,id = 'txt' for CSS purpose -->
+                         <!-- Reason to hard code the values but not fetching from database is Zipcode will be know to everyone  -->
+
+                        <input id = "txt"  type="text" list = "carrier" formControlName="carrier" placeholder="Please select your carrier" >
+                        <datalist id="carrier">
+                            <option selected>I'll pay by Myself</option>
+                            <option *ngFor="let carrier of listOfcarriers" value="{{carrier}}"></option>
+                        </datalist>
+
+                        <!-- Search button will be enabled after touching both the Doctor and zip fields -->
+
+                        <button type="submit" class="btn btn-primary btn-lg" [disabled]="!((searchForm.get('reason').value && searchForm.get('zipcode').value && searchForm.get('carrier').value))">
+                                     Search &nbsp;<span class="glyphicon glyphicon-search"></span></button>
+                    </form>
+
+                       <!-- Search-from ends here -->
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Divison for Image on right side-->
+    <div class="appoint-body"> </div>
+
+</section>
+<!-- Combine divison ends here -->
+<doctor-nearBy *ngIf = "errorMessage != null" [errMsg] = "errorMessage"> </doctor-nearBy>
+<doctor-nearBy *ngFor = "let list of doctorsList" [elementList] = "list" [carrier] = "searchForm.get('carrier').value"> </doctor-nearBy>
+
+
+
+<Customer-Footer></Customer-Footer>

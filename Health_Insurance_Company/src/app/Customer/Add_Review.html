@@ -1,0 +1,57 @@
+<Customer-Header></Customer-Header>
+
+<section class="combine">
+    
+    <div class="container">
+            <h3 id = "reviewTitle">“Whatever words we utter should be chosen with care ,
+                 people will hear them and be influenced by them for good or ill.”</h3>
+                 <br>
+            <table>
+                    
+                      <tr>
+                        <th class="col-lg-4"> Overall Rating </th>
+                        <th class="col-lg-4"> Bedside Manner </th>
+                        <th class="col-lg-4"> Wait Time </th>
+                      </tr>   
+                    
+                      <tr>
+                        <td class="col-lg-4"> 
+                                <rating [(ngModel)]="starsCount[0]" [float]="true" 
+                                        [titles]="['one', 'two', 'three', 'four', 'five']">        
+                                 </rating>
+                        </td>
+                        <td class="col-lg-4"> 
+                                <rating [(ngModel)]="starsCount[1]" [float]="true" 
+                                        [titles]="['one', 'two', 'three', 'four', 'five']">        
+                                 </rating>
+                        </td>
+                        <td class="col-lg-4"> 
+                                <rating [(ngModel)]="starsCount[2]" [float]="true" 
+                                        [titles]="['one', 'two', 'three', 'four', 'five']">        
+                                 </rating>
+                        </td>
+                      </tr>
+                            
+                  </table>
+        <br>
+        
+                <label> On Which day did you consult {{ doctorName}} 
+                        <br>
+                                 <datetime   [(ngModel)]="date"  [timepicker]="timepickerOpts"
+                                             [datepicker]= "datepickerOpts" [hasClearButton]="true">
+                                 </datetime>
+                </label>
+                        <h5><strong><i>Doctor Consultation Date: </i></strong> {{getDate(date) | date: "medium"}}</h5>
+        
+        
+        <br>
+        <label>Add Review :</label>
+        <textarea rows="7" cols="70" [(ngModel)]="reviewText">Enter your thoughts and revews here...</textarea>
+        <br><br>                                              
+        <button type="submit" class="btn btn-primary btn-lg" (click) = "addReview()"
+                style = "margin-left : 240px;">  Submit &nbsp; 
+                <span class="glyphicon glyphicon-search"></span>
+        </button>
+    </div>
+</section>
+<Customer-Footer></Customer-Footer>

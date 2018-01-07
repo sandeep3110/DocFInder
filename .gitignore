@@ -1,0 +1,9 @@
+*.js
+*.js.map
+*.class
+node_modules/
+*.log
+*.DS_Store
+.project
+.classpath
+.settings/

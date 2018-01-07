@@ -1,0 +1,44 @@
+<Customer-Header></Customer-Header>
+
+<section>
+        <div class="container">
+                <h1 id ="quote"> We are sorry to loose the opputunity to treat your health problem, 
+                                 Your Health is our first priority!!
+                </h1>
+                           
+        
+              <div class="modal-body" style="overflow-x: hidden; overflow-y: auto; height:35em;">
+                <ng-container *ngIf="patientAppointList && patientAppointList.length; else emptyAppointments">
+                        <h2> All Appointments </h2> 
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th class="col-md-3"> Doctor Name </th>
+                        <th class="col-md-3"> Appointment Date </th>
+                        <th class="col-md-6"> Reason </th>
+                        <th class="col-md-6"> Action </th>
+                      </tr>
+                    </thead>
+        
+                    <tbody>
+                      <tr *ngFor="let appointment of patientAppointList">
+                        <td class="col-md-3"> {{appointment.doctorName}} </td>
+                        <td class="col-md-3"> {{appointment.dateFromDb | date:'medium'}} </td>
+                        <td class="col-md-6"> {{appointment.reason}} </td>
+                        <td class="col-md-6"> 
+                                <button type="button" class="btn btn-danger" (click) = "cancelAppoint(appointment)"> Cancel </button>                                                        
+                        </td>
+                      </tr>
+                    </tbody>
+        
+                  </table>
+                </ng-container>
+        
+                <ng-template #emptyAppointments>
+                  <h2> You did not book any appointments to cancel!!</h2>
+                </ng-template>
+        </div>                
+    </div>
+</section>
+
+<Customer-Footer></Customer-Footer>

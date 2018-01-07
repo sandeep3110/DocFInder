@@ -1,0 +1,101 @@
+<Header-home></Header-home>
+
+
+<div class="w3ls-banner">
+    <div class="container" style="padding-top : 60px;">
+
+        <!-- Div class for login box -->
+
+        <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="panel-title">Sign In</div>
+                    <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Forgot password?</a></div>
+                </div>
+
+                <div style="padding-top:30px" class="panel-body">
+
+                    <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+
+                    <!-- Login Form starts from here -->
+
+                    <form id="loginform" class="form-horizontal" role="form" [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
+
+                        <!-- Login form Member ID field -->
+
+                        <div style="margin-bottom: 25px" class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input type="text" class="form-control" formControlName="memberId"  placeholder="Member Id">
+                            <p *ngIf="(loginForm.get('memberId').hasError('required') && loginForm.get('memberId').touched )"> Please Enter the Member Id </p>
+                            
+                        </div>
+
+                        <!-- Login form Password field -->
+
+                        <div style="margin-bottom: 25px" class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                            <input type="password" class="form-control" formControlName="password" placeholder="password">
+                            <p *ngIf="(loginForm.get('password').hasError('required') && loginForm.get('password').touched )"> Please Enter Password </p>
+                        </div>
+
+                        <!-- Remember Me Check box -->
+
+                        <div class="input-group">
+                            <div class="checkbox">
+                                <label>
+                                      <input id="login-remember" type="checkbox" name="remember" value="1"> <p> <em> Remember me </em> </p> 
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button [routerLink] = "['/home']" -->
+
+                        <div style="margin-top:10px" class="form-group"> 
+                            <div class="col-sm-12 controls">
+                                <button id="btn-login" type="submit" class="btn btn-info" [disabled]="!loginForm.valid" ><i class="icon-hand-right"></i> &nbsp; Login </button>
+                                
+                            </div>
+                        </div>
+
+                        <!-- Sign-up Button -->
+
+                        <div class="form-group">
+                            <div class="col-md-12 control">
+                                <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
+                                    <label style = "padding-right : 8px;"> Don't have an account! </label>                                   
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Sign up </button>                                                                        
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>      
+        
+    <!-- Div class for login box ends here -->
+
+
+<!-- Modal-box/pop up box for sign-up based on role with id #exampleModal-->
+
+         <Pop-up-box></Pop-up-box>
+
+ <!-- Sign-up page for Customer with insurance opens with id #Custsignupbox-->
+
+        <Cust-signUp-page></Cust-signUp-page>
+
+<!-- Sign-up page for Doctor  opens with id #Docsignupbox-->
+ 
+        <Doc-signUp-page></Doc-signUp-page>
+
+
+    </div>
+</div>
+
+
+
+
+
+
+<Footer-home></Footer-home>

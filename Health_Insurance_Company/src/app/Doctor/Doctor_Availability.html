@@ -1,0 +1,72 @@
+<Doctor-Header></Doctor-Header>
+
+<div class="container-fluid" style="padding-top: 1%">
+
+  <div class="row">
+    <div class="col-md-4">
+      <div style="padding-bottom: 3px;">
+        <h4> Please Select Availability </h4>
+      </div>
+
+      <div>
+        <datetime [(ngModel)]="date" [timepicker]="timepickerOpts" [datepicker]="datepickerOpts" [hasClearButton]="true">
+        </datetime>
+      </div>
+
+      <div>
+        <div style="margin-top: 10px; margin-bottom: 10px">
+          <h5>
+            <strong>
+              <i>Selected Time slot: </i>
+            </strong> {{getDate(date) | date: "short"}}
+          </h5>
+        </div>
+
+        <div>
+          <button type="button" class="btn btn-primary" (click)="addTimeSlot(getDate(date))" [disabled]="submitCheckBox" style="margin-top: 25px; margin-bottom: 25px">Add Time-Slot</button>
+          &nbsp;&nbsp;&nbsp;
+          <label>
+              <input type="checkbox" [(ngModel)]="submitCheckBox">
+              &nbsp; I have selected all Time Slots
+          </label>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary" (click)="submitTimeSlots()" [disabled]="!submitCheckBox">Submit</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-8" style="overflow-x: hidden; overflow-y: auto; height:28.85em;">
+      
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="col-md-2"> Date </th>
+            <th class="col-md-2"> Time </th>
+            <th class="col-md-2"> Action </th>
+          </tr>
+        </thead>
+        <ng-container>
+          <tbody *ngIf="docTimeSlots && docTimeSlots.length; else emptyAvailability">
+            <tr *ngFor="let slot of docTimeSlots">
+              <td class="col-md-2"> {{slot | date:'mediumDate'}} </td>
+              <td class="col-md-2"> {{slot | date:'shortTime'}} </td>
+              <td class="col-md-2">
+                <button type="button" class="btn btn-default" aria-label="Left Align" (click)="delete(slot)">
+                  <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </ng-container>
+        <ng-template #emptyAvailability>
+          <h4>Schedule hasn't been selected</h4>
+        </ng-template>
+      </table>
+
+    </div>
+
+  </div>
+</div>
+
+<Doctor-Footer></Doctor-Footer>
