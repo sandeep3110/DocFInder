@@ -1,0 +1,36 @@
+<Doctor-Header></Doctor-Header>
+
+<div class="container-fluid" style="margin-top: 25px">
+
+  <div class="modal-body" style="overflow-x: hidden; overflow-y: auto; height:28em;">
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="col-md-2"> Date </th>
+          <th class="col-md-2"> Time </th>
+          <th class="col-md-2"> Action </th>
+        </tr>
+      </thead>
+
+      <ng-container>
+        <tbody *ngIf="allDocSlots && allDocSlots.length; else emptyAvailability">
+          <tr *ngFor="let slot of allDocSlots">
+            <td class="col-md-2"> {{slot | date:'fullDate'}} </td>
+            <td class="col-md-2"> {{slot | date:'shortTime'}} </td>
+            <td class="col-md-2">
+              <button type="button" class="btn btn-warning" (click)="delete(slot)">
+                Delete Availability
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </ng-container>
+      <ng-template #emptyAvailability>
+        <h4>Schedule hasn't been Added by you</h4>
+      </ng-template>
+    </table>
+  </div>
+
+</div>
+
+<Doctor-Footer></Doctor-Footer>

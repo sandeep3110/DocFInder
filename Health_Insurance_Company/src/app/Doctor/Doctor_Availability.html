@@ -4,8 +4,8 @@
 
   <div class="row">
     <div class="col-md-4">
-      <div style="padding-bottom: 3px;">
-        <h4> Please Select Availability </h4>
+      <div style="padding-bottom: 25px;margin-top: 25px">
+        <h4> Please Add Availability For Next Few Weeks </h4>
       </div>
 
       <div>
@@ -15,10 +15,10 @@
 
       <div>
         <div style="margin-top: 10px; margin-bottom: 10px">
-          <h5>
+          <h5 style="margin-top: 25px">
             <strong>
               <i>Selected Time slot: </i>
-            </strong> {{getDate(date) | date: "short"}}
+            </strong> {{getDate(date) | date: "medium"}}
           </h5>
         </div>
 
@@ -26,18 +26,17 @@
           <button type="button" class="btn btn-primary" (click)="addTimeSlot(getDate(date))" [disabled]="submitCheckBox" style="margin-top: 25px; margin-bottom: 25px">Add Time-Slot</button>
           &nbsp;&nbsp;&nbsp;
           <label>
-              <input type="checkbox" [(ngModel)]="submitCheckBox">
-              &nbsp; I have selected all Time Slots
+            <input type="checkbox" [(ngModel)]="submitCheckBox"> &nbsp; I have selected all Time Slots
           </label>
         </div>
         <div>
-            <button type="submit" class="btn btn-primary" (click)="submitTimeSlots()" [disabled]="!submitCheckBox">Submit</button>
+          <button type="submit" class="btn btn-primary" (click)="submitTimeSlots()" [disabled]="!submitCheckBox">Submit</button>
         </div>
       </div>
     </div>
 
     <div class="col-md-8" style="overflow-x: hidden; overflow-y: auto; height:28.85em;">
-      
+
       <table class="table">
         <thead>
           <tr>

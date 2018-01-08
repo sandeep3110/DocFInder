@@ -22,6 +22,7 @@ export class DoctorHomeService {
   private _updateDocProfileUrl = 'http://localhost:8080/ASP/HealthDB/doctor/updateProfile';
   private _addDocTimeSlots = 'http://localhost:8080/ASP/HealthDB/doctor/addTimeSlots';
   private _getDocTimeSlots = 'http://localhost:8080/ASP/HealthDB/doctor/getTimeSlots';
+  private _deleteDocTimeSlot = 'http://localhost:8080/ASP/HealthDB/doctor/deleteTimeSlot';
 
   constructor(private http: Http) {
     let headers = new Headers();
@@ -112,6 +113,17 @@ export class DoctorHomeService {
       .catch(this.addDocTimeSlotsError);
   }
 
+  deleteDocTimeSlot(entries: any): Observable<IDoctorAvailability> {
+    console.log("Slot", entries.doctorSchedule);
+    
+    return this.http.request(this._deleteDocTimeSlot, entries)
+      .map(
+      (response: Response) => {
+        return response.json();
+      })
+      .catch(this.deleteDocTimeSlotsError);
+  }
+
   private handleError(err: any) {
     console.log('this is error', err);
     return Observable.throw(JSON.parse(err._body).appointmentsList[0].errMessage);
@@ -123,6 +135,11 @@ export class DoctorHomeService {
   }
 
   private getDocTimeSlotsError(err: any): any {
+    console.log('this is error', err);
+    return Observable.throw(JSON.parse(err._body).errMessage);
+  }
+
+  private deleteDocTimeSlotsError(err: any): any {
     console.log('this is error', err);
     return Observable.throw(JSON.parse(err._body).errMessage);
   }

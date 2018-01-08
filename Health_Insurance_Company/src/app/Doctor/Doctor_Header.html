@@ -63,7 +63,10 @@
                 <a href="#" data-toggle="modal" data-target="#doctorProfile" (click)="DoctorProfileClicked($event)"> Profile </a>
               </li>
               <li>
-                <a [routerLink]="['/doctorHome/'+ id +'/availability']" > Update Calendar  </a>
+                <a [routerLink]="['/doctorHome/'+ id +'/availability']" > Add Availability  </a>
+              </li>
+              <li>
+                <a [routerLink]="['/doctorHome/'+ id +'/showAvailability']" > View/Delete Availability  </a>
               </li>
               <li>
                 <a [ngStyle]="pointer()" (click)="logOut()"> Log Out </a>

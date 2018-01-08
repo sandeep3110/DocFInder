@@ -49,6 +49,7 @@ import { CustomerService } from './RESTFul_API_Service/Customer.Home.service';
 import { EmailNotification } from './RESTFul_API_Service/Email.Notifications.Service'
 import { AppointmentService } from './RESTFul_API_Service/Appointment.service';
 import { DoctorHomeService } from './RESTFul_API_Service/Doctor.Home.service';
+import { UpdateDocAvailability } from './Doctor/Update_Availability.component';
 
 
 
@@ -92,7 +93,8 @@ const appRoutes: Routes = [
     children: [
       // From Login.component.ts it will come to  router.navigate(['home'])--> CustomerHomeView --> CustomerAuthGuard = true
       { path: 'doctorHome/:', component: DoctorHomeView },
-      { path: 'doctorHome/:id/availability', component: DoctorAvailability }
+      { path: 'doctorHome/:id/availability', component: DoctorAvailability },
+      { path: 'doctorHome/:id/showAvailability', component: UpdateDocAvailability }
     ]
   },
 
@@ -141,7 +143,8 @@ const appRoutes: Routes = [
     DoctorFooter,
     DoctorDefaultView,
     DoctorHomeView,
-    DoctorAvailability],
+    DoctorAvailability,
+    UpdateDocAvailability],
 
   providers: [CustomerAuthGuard,
     AuthenticationService,
