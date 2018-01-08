@@ -17,21 +17,26 @@ export class UpdateDocAvailability extends CustomerAuthGuard {
         this.getDocTimeSlots();
     }
 
-    errorMessage:string;
+    errorMessage: string;
     allDocSlots: any[];
     docTimeSlots: any[];
 
     delete(slot: any) {
-        if(confirm("Are you sure you want to delete the selected availability ?")) {
+        if (confirm("Are you sure you want to delete the selected availability ?")) {
             var entries: any = {
                 doctorMemberId: this.customerData.memberId,
                 doctorSchedule: []
             };
 
             entries.doctorSchedule.push(slot);
-            this.doctorHomeService.deleteDocTimeSlot(entries);
-            this.allDocSlots = this.allDocSlots.filter(arrElement => arrElement.valueOf() != slot.valueOf());
-            window.alert("selected availability has been deleted, patients scheduled for this appointment have been notified by email");
+            this.doctorHomeService.deleteDocTimeSlot(entries)
+                .subscribe(response => {
+                    this.allDocSlots = this.getDocTimeSlots();
+                    window.alert("selected availability has been deleted, patients scheduled for this appointment have been notified by email");
+                },
+                error => {
+                    this.errorMessage = <any>error;
+                });
         }
     }
 

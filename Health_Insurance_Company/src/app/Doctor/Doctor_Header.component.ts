@@ -2,6 +2,8 @@ import { Component } from "@angular/core";
 import { CustomerAuthGuard } from "../Customer/Customer_AuthGuard";
 import { Router } from "@angular/router";
 import { DoctorHomeService } from "../RESTFul_API_Service/Doctor.Home.service";
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { IDoctorCredentials } from "./Doctor_Credentials";
 
 @Component({
   selector: 'Doctor-Header',
@@ -10,6 +12,7 @@ import { DoctorHomeService } from "../RESTFul_API_Service/Doctor.Home.service";
 })
 
 export class DoctorHeader extends CustomerAuthGuard {
+  updatedPasswordResp: IDoctorCredentials;
 
   /* Either Local storage or session storage application is throughing error while
      restarting the app --> "User Data doesn't exist on storage" */
@@ -25,11 +28,15 @@ export class DoctorHeader extends CustomerAuthGuard {
   errorMessage: string;
   doctorProfile = <any>[];
   updateResponse = <any>[];
+  passwordMatch: boolean;
   editDocProfileMessage: string;
+  doctor = <any>[];
   hasMessage: boolean = false;
+  passwordSuccessMsg: string;
+  passwordErrorMsg: string;
 
   /* Taking the sessionstorage into Customer values from Customer_AuthGuard_ts rather declaring another variable */
-  constructor(private doctorHomeService: DoctorHomeService, private rout: Router) {
+  constructor(private doctorHomeService: DoctorHomeService, private rout: Router, private fb: FormBuilder) {
     super(rout);
     this.id = this.customerData.memberId;
   }
@@ -41,7 +48,7 @@ export class DoctorHeader extends CustomerAuthGuard {
 
     this.modalTitle = "Past Appointments";
 
-    this.doctorHomeService.getPastAppointments(entries)    
+    this.doctorHomeService.getPastAppointments(entries)
       .subscribe(appointments => {
         this.patientAppointments = appointments;
       },
@@ -59,7 +66,7 @@ export class DoctorHeader extends CustomerAuthGuard {
       .subscribe(reviews => {
         this.patientReviews = reviews;
       },
-      error => {        
+      error => {
         this.errorMessage = <any>error;
       });
   };
@@ -74,7 +81,7 @@ export class DoctorHeader extends CustomerAuthGuard {
         this.patientLabReports = labReports;
       },
       error => {
-        
+
         this.errorMessage = <any>error;
       });
   }
@@ -88,7 +95,7 @@ export class DoctorHeader extends CustomerAuthGuard {
       .subscribe(appointments => {
         this.patientAppointments = appointments;
       },
-      error => {        
+      error => {
         this.errorMessage = <any>error;
       });
   }
@@ -103,10 +110,50 @@ export class DoctorHeader extends CustomerAuthGuard {
         this.doctorProfile = doctorProfile;
       },
       error => {
-        console.log("Get Doc Profile", this.doctorProfile);        
+        console.log("Get Doc Profile", this.doctorProfile);
         this.editDocProfileMessage = <any>error;
         this.hasMessage = true;
       });
+  }
+
+  updatePasswordClicked() {
+    this.doctor = {
+      password: '',
+      confirmPassword: ''
+    };
+    this.passwordMatch = true;
+  }
+
+  passwordCheck(doctor: any): boolean {
+    if (doctor.password === doctor.confirmPassword) {
+      return true;
+    }
+    return false;
+  }
+
+  updatePassword(event: any) {
+    this.passwordMatch = this.passwordCheck(this.doctor);
+
+    if (this.passwordMatch) {
+      console.log("Password is ", this.doctor.password);
+      console.log("Password is ", this.doctor.confirmPassword);
+      var entries = {
+        doctorMemberId: this.customerData.memberId,
+        password: this.doctor.password
+      }
+      this.doctorHomeService.updatePassword(entries)
+        .subscribe(result => {
+          console.log(result);
+          this.updatedPasswordResp = result;
+          this.hasMessage = true;
+          result.password = "";
+          this.passwordSuccessMsg = result.successMessage;
+        },
+        error => {
+          this.passwordErrorMsg = <any>error;
+          this.hasMessage = true;
+        });
+    }
   }
 
   editDoctorProfile(event: any) {
@@ -131,7 +178,7 @@ export class DoctorHeader extends CustomerAuthGuard {
       specialities: this.doctorProfile.specialities
     };
 
-    
+
     this.doctorHomeService.updateDoctorProfile(entries)
       .subscribe(doctorQualifications => {
         this.updateResponse = doctorQualifications;

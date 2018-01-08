@@ -60,7 +60,7 @@ export class DoctorAvailability extends CustomerAuthGuard {
 
     addTimeSlot(date: Date) {
         this.selectedDate = new Date(date);
-
+        console.log("this is after all get docl slots", this.allDocSlots);
         if (this.selectedDate.getHours() >= 8 && this.selectedDate.getHours() < 19) {
             var obj = { currentDate: new Date(this.selectedDate.setSeconds(0)).toISOString() };
             let isExist = (this.docTimeSlots.length < 1) ? true : this.docTimeSlots.every(this.checkDuplicate, obj);
@@ -91,6 +91,7 @@ export class DoctorAvailability extends CustomerAuthGuard {
         this.doctorHomeService.getDocTimeSlots(docInfo)
             .subscribe(response => {
                 this.allDocSlots = response.doctorSchedule;
+                console.log("all doc slots length", this.allDocSlots);
             },
             error => {
                 this.errorMessage = <any>error;
@@ -99,6 +100,7 @@ export class DoctorAvailability extends CustomerAuthGuard {
 
     submitTimeSlots() {
         if (this.docTimeSlots && this.docTimeSlots.length) {
+            console.log(this.docTimeSlots);
             var entries: any = {
                 doctorMemberId: this.customerData.memberId,
                 doctorSchedule: this.docTimeSlots

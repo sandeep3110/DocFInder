@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
+import { Http, Response, Headers, RequestOptions, RequestMethod } from '@angular/http';
 
 
 import 'rxjs/add/operator/map';
@@ -9,6 +9,7 @@ import { IPatientAppointments } from '../Doctor/Patient-Appointments';
 import { IDoctorProfile } from '../Doctor/Doctor-Profile';
 import { IDoctorQualifications } from '../Doctor/Doctor-Qualifications';
 import { IDoctorAvailability } from '../Doctor/Doctor_Availability';
+import { IDoctorCredentials } from '../Doctor/Doctor_Credentials';
 
 "use strict";
 
@@ -23,6 +24,8 @@ export class DoctorHomeService {
   private _addDocTimeSlots = 'http://localhost:8080/ASP/HealthDB/doctor/addTimeSlots';
   private _getDocTimeSlots = 'http://localhost:8080/ASP/HealthDB/doctor/getTimeSlots';
   private _deleteDocTimeSlot = 'http://localhost:8080/ASP/HealthDB/doctor/deleteTimeSlot';
+  private _updatePassword = 'http://localhost:8080/ASP/HealthDB/doctor/updatePassword'
+  private options:any;
 
   constructor(private http: Http) {
     let headers = new Headers();
@@ -96,6 +99,7 @@ export class DoctorHomeService {
   }
 
   addDocTimeSlots(entries: any): Observable<IDoctorAvailability> {
+    console.log("Total schedule before post call", entries.doctorSchedule.length);
     return this.http.post(this._addDocTimeSlots, entries)
       .map(
       (response: Response) => {
@@ -115,13 +119,26 @@ export class DoctorHomeService {
 
   deleteDocTimeSlot(entries: any): Observable<IDoctorAvailability> {
     console.log("Slot", entries.doctorSchedule);
-    
-    return this.http.request(this._deleteDocTimeSlot, entries)
+    this.options = new RequestOptions({ 
+      body: entries,
+      method: RequestMethod.Delete
+    });
+
+    return this.http.request(this._deleteDocTimeSlot, this.options)
       .map(
       (response: Response) => {
         return response.json();
       })
       .catch(this.deleteDocTimeSlotsError);
+  }
+
+  updatePassword(entries: any): Observable<IDoctorCredentials> {
+    return this.http.put(this._updatePassword, entries)
+      .map(
+      (response: Response) => {
+        return response.json();
+      })
+      .catch(this.credentialsUpdateError);
   }
 
   private handleError(err: any) {
@@ -155,6 +172,11 @@ export class DoctorHomeService {
   }
 
   private updateDoctorProfileError(err: any) {
+    console.log('this is update error', JSON.parse(err._body).errMessage);
+    return Observable.throw(JSON.parse(err._body).errMessage);
+  }
+
+  private credentialsUpdateError(err: any) {
     console.log('this is update error', JSON.parse(err._body).errMessage);
     return Observable.throw(JSON.parse(err._body).errMessage);
   }
